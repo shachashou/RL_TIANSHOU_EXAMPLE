@@ -23,7 +23,7 @@ policy.load_state_dict(torch.load(f"STATE/{ENV_ID}.pth"))
 policy.to("cuda")
 
 policy.eval()
-policy.set_eps(POLICY_TEST_EPS)
+policy.set_eps(0)
 
 envs = ts.env.DummyVectorEnv(
     [lambda: gym.make(ENV_ID, render_mode="human")]
