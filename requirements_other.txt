@@ -1,3 +1,2 @@
 tianshou
-gymnasium[classic-control]
-gymnasium[box2d]
+gymnasium[classic-control,box2d]
