@@ -1,2 +1,4 @@
 tianshou
-gymnasium[classic-control,box2d]
+gymnasium[classic-control,box2d,atari, accept-rom-license]
+ale-py
+opencv-python
