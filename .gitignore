@@ -3,3 +3,4 @@
 /STATE
 *.pyc
 /debug.py
+__pycache__
