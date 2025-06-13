@@ -1,7 +1,13 @@
 ## train some rl agent using Tianshou
+
 ### about
-DQN => RainbowDQN => PPO
-### quick start 
+
+DQN [ acrobot blackjack carpole frozenlake lunarlander mountaincar ]
+RainbowDQN [ airraid alien ]
+PPO []
+
+### quick start
+
 ```
 git clone https://github.com/shachashou/RL_TIANSHOU_EXAMPLE.git
 cd RL_TIANSHOU_EXAMPLE
