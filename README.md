@@ -3,7 +3,9 @@
 ### about
 
 DQN [ acrobot blackjack carpole frozenlake lunarlander mountaincar ]
+
 RainbowDQN [ airraid alien ]
+
 PPO []
 
 ### quick start
