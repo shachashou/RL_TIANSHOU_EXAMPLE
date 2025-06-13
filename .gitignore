@@ -1,6 +1,6 @@
 /.venv
 /.idea
-/STATE
 *.pyc
 /debug.py
 __pycache__
+*.pth
