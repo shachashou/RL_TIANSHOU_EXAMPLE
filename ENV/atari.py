@@ -10,30 +10,40 @@ gym.register_envs(ale_py)
 
 
 class AtariWrapper(gym.Wrapper):
-    def __init__(self, env_id="", render_mode=None, frame_stack=4, resize_height=64, resize_width=64):
+    def __init__(self, env_id="", render_mode=None, frame_stack=4, resize=True, resize_height=64, resize_width=64):
         env = gym.make(env_id, obs_type="grayscale", render_mode=render_mode)
         super().__init__(env)
 
         self.frame_stack = frame_stack
-
+        self.resize = resize
         self.frames = deque([], maxlen=frame_stack)
 
-        self.observation_space = spaces.Box(
-            low=0,
-            high=255,
-            shape=(frame_stack, resize_height, resize_width),
-            dtype=np.uint8
-        )
+        if resize:
+            self.observation_space = spaces.Box(
+                low=0,
+                high=255,
+                shape=(frame_stack, resize_height, resize_width),
+                dtype=np.uint8
+            )
+        else:
+            self.observation_space = spaces.Box(
+                low=0,
+                high=255,
+                shape=(frame_stack, env.observation_space.shape[0], env.observation_space.shape[1]),
+                dtype=np.uint8
+            )
 
     def _preprocess(self, frame):
-        frame = cv2.resize(
-            frame,
-            (
-                self.observation_space.shape[1],
-                self.observation_space.shape[2],
-            ),
-            interpolation=cv2.INTER_AREA
-        )
+        if self.resize:
+            frame = cv2.resize(
+                frame,
+                (
+                    self.observation_space.shape[1],
+                    self.observation_space.shape[2],
+                ),
+                interpolation=cv2.INTER_AREA
+            )
+
         return frame
 
     def _get_observation(self) -> np.ndarray:
@@ -53,4 +63,4 @@ class AtariWrapper(gym.Wrapper):
         obs = self._preprocess(obs)
         self.frames.append(obs)
 
-        return self._get_observation(), reward, terminated, truncated, info
+        return self._get_observation(), float(reward), terminated, truncated, info
